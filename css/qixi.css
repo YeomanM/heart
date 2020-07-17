@@ -28,6 +28,7 @@
 	left: 0;
 	bottom: 0;
 	position: absolute;
+	transform-style: preserve-3d;
 }
 
 .box {
@@ -61,33 +62,64 @@
 	left: 900px;
 }
 
+/*.big_heart_1 {*/
+/*	width: 300px;*/
+/*	height: 300px;*/
+/*	background-color: azure;*/
+/*	transform: rotate(-45deg);*/
+/*}*/
 
-.big_heart {
-	width: 280px;
-	height: 280px;
+/*.big_heart_1::before {*/
+/*	content: "";*/
+/*	width: 300px;*/
+/*	height: 300px;*/
+/*	top: -150px;*/
+/*	background-color: pink;*/
+/*	position: absolute;*/
+/*	border-radius: 100%;*/
+/*}*/
+
+/*.big_heart_1::after {*/
+/*	content: "";*/
+/*	width: 300px;*/
+/*	height: 300px;*/
+/*	top: 0px;*/
+/*	left: 150px;*/
+/*	border-radius: 100%;*/
+/*	position: absolute;*/
+/*	background-color: pink;*/
+/*}*/
+
+
+.my_heart {
+	width: 100px;
+	height: 100px;
 	background-color: pink;
 	transform: rotate(-45deg);
+	opacity: 0;
 }
 
-.big_heart::before {
+.my_heart::before {
 	content: "";
-	width: 280px;
-	height: 280px;
-	top: -140px;
+	width: 100px;
+	height: 100px;
+	top: -50px;
 	background-color: pink;
 	position: absolute;
 	border-radius: 100%;
+	/*opacity: 0;*/
 }
 
-.big_heart::after {
+.my_heart::after {
 	content: "";
-	width: 280px;
-	height: 280px;
+	width: 100px;
+	height: 100px;
 	top: 0px;
-	left: 140px;
+	left: 50px;
 	border-radius: 100%;
 	position: absolute;
 	background-color: pink;
+	/*opacity: 0;*/
 }
 
 
@@ -117,6 +149,55 @@
 	position: absolute;
 	left: 25px;
 	top: 0;
+}
+
+.big_heart {
+	transform: rotate(-45deg);
+	animation: wateranimate 15s -15s ease-in-out infinite;
+}
+
+.big_heart_1 {
+	transform: rotate(-45deg);
+	animation: wateranimate 15s -12s ease-in-out infinite;
+}
+
+.big_heart_2 {
+	transform: rotate(-45deg);
+	animation: wateranimate 15s -9s ease-in-out infinite;
+}
+
+.big_heart_3 {
+	transform: rotate(-45deg);
+	animation: wateranimate 15s -6s ease-in-out infinite;
+}
+
+.big_heart_4 {
+	transform: rotate(-45deg);
+	animation: wateranimate 15s -3s ease-in-out infinite;
+}
+
+.big_heart_5 {
+	transform: rotate(-45deg);
+	animation: wateranimate 15s 0s ease-in-out infinite;
+}
+
+
+
+@keyframes wateranimate {
+	0% {
+		transform: scale(0) rotate(-45deg);
+		opacity: 1;
+	}
+
+	50% {
+		transform: scale(3) rotate(-45deg);
+		opacity: 0.5;
+	}
+
+	100% {
+		transform: scale(4) rotate(-45deg);
+		opacity: 0;
+	}
 }
 
 
