@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<p class="landIn">Ano hi watashitachi mada shiranai no Fushigi no monogatari desu.</p>
+	</body>
+</html>
+
+<style type="text/css">
+	body {
+	  display: flex;
+	  flex-direction: column;
+	  height: 100vh;
+	  justify-content: center;
+	  align-items: center;
+	  background-color: #000000;
+	}
+	
+	p {
+	  margin: 0 9em;
+	  font-size: 2em;
+	  font-weight: 600;
+	}
+	
+	.landIn {
+	  display: flex;
+	  flex-wrap: wrap;
+	  line-height: 1.8;
+	  color: white;
+	  font-family: Lora, serif;
+	  white-space: pre;
+	
+	}
+	
+	span {
+		color: #00F7DE;
+	  animation: landIn 0.8s ease-out both;
+	}
+	
+	@keyframes landIn {
+	  from {
+	    opacity: 0;
+	    transform: translateY(-20%);
+	  }
+	
+	  to {
+	    opacity: 1;
+	    transform: translateY(0);
+	  }
+	}
+</style>
+
+<script type="text/javascript">
+	
+	window.onload=function(){
+		let landInTexts = document.querySelectorAll(".landIn");
+		console.log(landInTexts);
+		landInTexts.forEach(landInText => {
+		  let letters = landInText.textContent.split("");
+		  landInText.textContent = "";
+		  letters.forEach((letter, i) => {
+		    let span = document.createElement("span");
+		    span.textContent = letter;
+		    span.style.animationDelay = `${i * 0.05}s`;
+		    landInText.append(span);
+		  });
+		});
+	}
+</script>
