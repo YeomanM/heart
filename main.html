@@ -3,7 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>main</title>
-    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Bad+Script|Gruppo|Kumar+One+Outline|League+Script|Londrina+Outline|Monoton|Sriracha|Yellowtail&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789宇宙银河?+'>
+    <style type="text/css">
+        @font-face {
+            font-family: 华文行楷;
+            src: url("./font/华文行楷.ttf");
+        }
+    </style>
 
 </head>
 <body>
@@ -12,7 +17,7 @@
 <div id="sky">
     <div id="moon"></div>
     <div>
-        <p class="myText">宇宙银河</p>
+        <p class="myText">七夕快乐</p>
     </div>
     <img src="images/moon.png" width="480" height="480">
 </div>
@@ -84,7 +89,8 @@
         text-align: center;
         position: absolute;
         color: blue;
-        font-size: 50px;
+        font-size: 80px;
+        font-family: 华文行楷,monospace;
     }
 
     .eachLetter {
@@ -98,7 +104,6 @@
         color: azure;
         will-change: filter , color;
         filter: saturate(60%);
-        font-family: Sriracha,serif;
         animation: eachText 3s ease-out both, flicker steps(100) 1s infinite;
     }
 
