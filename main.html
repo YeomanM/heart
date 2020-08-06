@@ -239,19 +239,22 @@
         #enter {
             --fill-color : white;
             display: block;
-            font: 700 5em "Baloo Bhaijaan", cursive;
+            font: 700 6em "Baloo Bhaijaan", cursive;
             text-transform: uppercase;
             text-decoration: none;
             background: linear-gradient(var(--fill-color) 0 100%) left / 0 no-repeat;
             -webkit-text-stroke: 2px var(--fill-color);
             color: transparent;
             -webkit-background-clip: text;
-            transition: 0.5s linear;
+            transition:background-size 0.5s linear, transform 0.1s;
         }
 
         #enter:hover{
             background-size: 100%;
-            font-size: 6em;
+        }
+
+        #enter:active {
+            transform: scale(0.8);
         }
 
         #btn::after,
@@ -298,6 +301,45 @@
             }
         }
 
+        #main_content {
+            opacity: 1;
+            animation: ease-in main_content 0.7s;
+        }
+
+        @keyframes main_content {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /*.musicController {*/
+        /*    border: white 1px solid;*/
+        /*    border-radius: 50%;*/
+        /*    position: absolute;*/
+        /*    background-color: white;*/
+        /*    left: 83%;*/
+        /*    bottom: 10%;*/
+        /*    animation: musicRound 27s infinite;*/
+        /*}*/
+
+        /*@keyframes musicRound {*/
+        /*    0% {*/
+        /*        transform: rotate(0deg);*/
+        /*    }*/
+
+        /*    50% {*/
+        /*        transform: rotate(180deg);*/
+        /*    }*/
+
+        /*    100% {*/
+        /*        transform: rotate(360deg);*/
+        /*    }*/
+        /*}*/
+
         
     </style>
 
@@ -309,7 +351,6 @@
 
             eachLoadingText();
 
-            console.log(count);
             let star = document.getElementsByClassName("star")[0];
             for(let i = 0;i < count; i++) {
                 star.appendChild(starCreator())
@@ -319,11 +360,28 @@
             for (let i = 0;i < 25; i++) {
                 content.append(meteorCreator(i));
             }
-
-
-
             eachText();
+
+            $("#enter").click(() => {
+                setTimeout(() => {
+                    $("#btn").css("display", "none");
+                    $("#loading").css("display", "flex");
+                    setTimeout(() => {
+                        $("#main_content").css("display", "inherit");
+                        controlMusic();
+                    }, 6700);
+                }, 100);
+            });
         });
+
+        function controlMusic() {
+            let music = document.getElementById("bgm");
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        }
 
         function starCreator() {
             let star = document.createElement("span");
@@ -334,7 +392,7 @@
             star.style.top = Math.ceil(Math.random() * window.innerHeight) + "px";
             star.style.left = Math.ceil(Math.random() * window.innerWidth) + "px";
             star.style.borderRadius = width + "px";
-            star.style.backgroundColor = "#909090"
+            star.style.backgroundColor = "#909090";
             star.style.boxShadow = "#545454 0 0 1px 1px";
             if (width < 1) {
                 star.style.boxShadow = "#545454 0 0 " + (width / 2) + "px " + (width / 2) + "px";
@@ -346,7 +404,6 @@
         function eachLoadingText() {
             let texts = document.querySelector(".loading");
             let letters = texts.textContent.split("");
-            console.log(letters)
             texts.textContent = "";
             letters.forEach((letter, i) => {
                 let span = document.createElement("span");
@@ -396,9 +453,11 @@
         <div id="sky">
             <div id="moon"></div>
             <div>
-                <p class="myText">七夕快乐</p>
+<!--                <p class="myText">七夕快乐</p>-->
+                <p class="myText">欢度国庆</p>
             </div>
             <img src="images/moon.png" width="480" height="480" alt="">
+<!--            <img src="images/nlzn.png" width="120" height="120" alt="nlzn" class="musicController">-->
         </div>
         <audio hidden loop id="bgm"
                src="https://www.yeoman.xyz:9527/music/%E9%82%93%E4%B8%BD%E6%AC%A3-%E4%B8%83%E5%A4%95.mp3"></audio>
