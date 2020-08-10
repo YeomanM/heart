@@ -339,7 +339,6 @@
         /*        transform: rotate(360deg);*/
         /*    }*/
         /*}*/
-
         
     </style>
 
@@ -368,7 +367,7 @@
                     $("#loading").css("display", "flex");
                     setTimeout(() => {
                         $("#main_content").css("display", "inherit");
-                        controlMusic();
+                        // controlMusic();
                     }, 6700);
                 }, 100);
             });
@@ -456,6 +455,12 @@
 <!--                <p class="myText">七夕快乐</p>-->
                 <p class="myText">欢度国庆</p>
             </div>
+            <div class="dialog">
+                <section class="dialog-box">
+                    <div class="rectangle"></div>
+                    <div class="triangle"></div>
+                </section>
+            </div>
             <img src="images/moon.png" width="480" height="480" alt="">
 <!--            <img src="images/nlzn.png" width="120" height="120" alt="nlzn" class="musicController">-->
         </div>
@@ -463,4 +468,40 @@
                src="https://www.yeoman.xyz:9527/music/%E9%82%93%E4%B8%BD%E6%AC%A3-%E4%B8%83%E5%A4%95.mp3"></audio>
     </div>
 </body>
+
+<style type="text/css">
+    .dialog-box {
+        display: flex;
+        align-items: center;
+    }
+
+    .rectangle {
+        width: 290px;
+        height: 85px;
+        border-radius: 5px;
+        padding: 10px;
+        background-color: lightgrey;
+        color: black;
+        font-size: 24px;
+        box-sizing: border-box;
+    }
+
+    .triangle {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-top: 20px solid lightgrey;
+        border-right: 10px solid transparent;
+        transform: translate(-250px, 45px);
+    }
+
+    .dialog {
+        position: absolute;
+        top: 60%;
+        left: 20%;
+
+    }
+
+</style>
+
 </html>
