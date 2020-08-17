@@ -10,6 +10,14 @@
             font-family: 华文行楷;
             src: url("./font/华文行楷.ttf");
         }
+        @font-face {
+            font-family: 蝉羽刀剑柔情;
+            src: url("./font/cydjyq.ttf");
+        }
+        @font-face {
+            font-family: KswHannyaotamesi;
+            src: url("./font/jdmbzt.ttf");
+        }
     </style>
 
     <style type="text/css">
@@ -23,7 +31,9 @@
             width: 100%;
             height: 100%;
             position: relative;
-            background-color: #000;
+            background-color: lightskyblue;
+            /*background-color: #000;*/
+            /*animation: sky 4s ease-in-out;*/
         }
 
         .star {
@@ -94,6 +104,20 @@
             will-change: filter , color;
             filter: saturate(60%);
             animation: eachText 3s ease-out both, flicker steps(100) 1s infinite;
+        }
+
+        @keyframes sky {
+            from {
+                background-color: lightskyblue;
+            }
+
+            /*50% {*/
+            /*    background-color: lightgoldenrodyellow;*/
+            /*}*/
+
+            to {
+                background-color: black;
+            }
         }
 
         @keyframes flicker {
@@ -329,16 +353,15 @@
 
             eachLoadingText();
 
-            let star = document.getElementsByClassName("star")[0];
-            for(let i = 0;i < count; i++) {
-                star.appendChild(starCreator())
-            }
-            console.log(count);
+            // let star = document.getElementsByClassName("star")[0];
+            // for(let i = 0;i < count; i++) {
+            //     star.appendChild(starCreator())
+            // }
 
-            let content = document.getElementById("main_content");
-            for (let i = 0;i < 25; i++) {
-                content.append(meteorCreator(i));
-            }
+            // let content = document.getElementById("main_content");
+            // for (let i = 0;i < 25; i++) {
+            //     content.append(meteorCreator(i));
+            // }
             eachText();
 
             $("#enter").click(() => {
@@ -347,6 +370,7 @@
                     $("#loading").css("display", "flex");
                     setTimeout(() => {
                         $("#main_content").css("display", "block");
+                        $("body").css("animation", "sky 4s ease-in-out").css("background-color", "#000");
                         // controlMusic();
                         $("#loading").css("display", "none");
                         setTimeout(print, 18300);
@@ -357,7 +381,7 @@
 
         let index = 0;
         function print() {
-            let text = "亲爱的，七夕快乐，这是我们一起的第七个七月七";
+            let text = "亲爱的，七夕快乐，这是我们一起的第七个七月七。这是我们在一起的时光";
             let len = text.length;
             if (index < len) {
                 $("#justText").html(text.substr(0, index++) + "_");
@@ -365,22 +389,23 @@
             } else {
                 index = 0;
                 $("#justText").html(text);
-                setTimeout(printLoveText, 100);
+                setTimeout(printTimeText, 1200);
+                // setTimeout(printLoveText, 100);
             }
         }
 
-        function printLoveText() {
-            let text = "这是我们在一起的时光"
-            let  len = text.length;
-            if (index < len) {
-                $("#loveText").html(text.substring(0, index++) + "_");
-                setTimeout(printLoveText, 300);
-            } else {
-                index = 0;
-                $("#loveText").html(text);
-                setTimeout(printTimeText, 100);
-            }
-        }
+        // function printLoveText() {
+        //     let text = "这是我们在一起的时光"
+        //     let  len = text.length;
+        //     if (index < len) {
+        //         $("#loveText").html(text.substring(0, index++) + "_");
+        //         setTimeout(printLoveText, 300);
+        //     } else {
+        //         index = 0;
+        //         $("#loveText").html(text);
+        //         setTimeout(printTimeText, 1000);
+        //     }
+        // }
 
         function printTimeText() {
 
@@ -389,29 +414,18 @@
             let len = text.length;
             let element = $("#timeText");
             let html = $(element).html();
-            html = html.substring(0, html.length - 1);
+            html = html.replace("_", "");
             let i = Math.floor(index / 2);
 
             if (index < 8) {
                 if (index % 2 === 0) {
                     let times = getTime();
-                    html += "<span id='" + ids[i] + "'>" + times[i] + "</span>" + "_";
+                    html += "<span id='" + ids[i] + "' style='font-size: 2em;'>"
+                        + times[i] +
+                        " </span>" + "_";
                     $(element).html(html);
                     setTimeout(printTimeText, 300);
-                    //     setDay(getTime()[0]);
-                    // } else if (index === 2) {
-                    //     let times = getTime();
-                    //     setDay(times[0]);
-                    //     setHour(times[1]);
-                    // } else if (index === 4) {
-                    //     let times = getTime();
-                    //     setDay(times[0]);
-                    //     setHour(times[1]);
-                    //     setMinute(times[2]);
-                    // } else if (index === 6) {
-                    //
                 } else {
-                    console.log(i);
                     html += text[i] + "_";
                     $(element).html(html);
                     setTimeout(printTimeText, 300);
@@ -419,7 +433,20 @@
                 index++;
             } else {
                 $(element).html(html);
+                index = 0;
                 setInterval(setTimes, 1000);
+                setTimeout(printNameText, 700);
+            }
+        }
+
+        function printNameText() {
+            let text = "-- for 林小花";
+            let len = text.length;
+            if (index < len) {
+                $("#nameText").html(text.substr(0, index++) + "_");
+                setTimeout(printNameText, 300);
+            } else {
+                $("#nameText").html(text);
             }
         }
 
@@ -528,6 +555,34 @@
 </head>
 
 <style type="text/css">
+
+    #honeyText {
+        width: 100%;
+        height: 40%;
+        align-items: center;
+        display: inline-block;
+        vertical-align: center;
+        padding-top: 15px;
+    }
+
+    #honeyText p {
+        margin: auto;
+        width: 60%;
+        color: yellow;
+        font-size: 1.5em;
+        font-family: 华文行楷,monospace;
+    }
+    #honeyText p span{
+        font-family: 蝉羽刀剑柔情, KswHannyaotamesi, monospace;
+        padding: 15px;
+    }
+
+    #nameText {
+        font-family: KswHannyaotamesi,monospace;
+        color: yellow;
+        float: right;
+    }
+
     .myBorder {
         border: 10px solid transparent;
         border-image: url("./images/b5.png") 30 round;
@@ -538,9 +593,7 @@
         margin: 0;
         left: 22%;
         box-sizing: border-box;
-        animation : border-wrap 6s ease-in-out;
-        /*align-items: center;*/
-        /*text-align: center;*/
+        animation : border-wrap 7s ease-in-out;
     }
 
     @keyframes border-wrap {
@@ -578,10 +631,10 @@
             <div class="myBorder">
 <!--                <p class="myText">七夕快乐</p>-->
                 <p class="myText">欢度国庆</p>
-                <div>
-                    <p id="justText" style="color: yellow"></p>
-                    <p id="loveText" style="color: yellow"></p>
-                    <p id="timeText" style="color: yellow"></p>
+                <div id="honeyText">
+                    <p id="justText"></p>
+                    <p id="timeText"></p>
+                    <p id="nameText"></p>
                 </div>
             </div>
             <div class="dialog">
@@ -590,7 +643,7 @@
                     <div class="triangle"></div>
                 </section>
             </div>
-            <img src="images/moon.png" width="480" height="480" alt="">
+<!--            <img src="images/moon.png" width="480" height="480" alt="">-->
 <!--            <img src="images/nlzn.png" width="120" height="120" alt="nlzn" class="musicController">-->
         </div>
         <audio hidden loop id="bgm"
