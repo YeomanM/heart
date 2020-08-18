@@ -8,7 +8,7 @@
     <style type="text/css">
         @font-face {
             font-family: 华文行楷;
-            src: url("./font/华文行楷.ttf");
+            src: url("./font/hwxk.ttf");
         }
         @font-face {
             font-family: 蝉羽刀剑柔情;
@@ -439,9 +439,22 @@
                 $(element).html(html);
                 index = 0;
                 setInterval(setTimes, 1000);
-                setTimeout(printNameText, 700);
+                setTimeout(printNameText, 2100);
             }
         }
+
+        // function printPreName() {
+        //     let text = "-- for ";
+        //     let len = text.length;
+        //     if (index < len) {
+        //         $("#namePre").html(text.substr(0, index++) + "_");
+        //         setTimeout(printNameText, 300);
+        //     } else {
+        //         index = 0;
+        //         $("#namePre").html(text);
+        //         setTimeout(printNameText, 700);
+        //     }
+        // }
 
         function printNameText() {
             let text = "-- for 林小花";
@@ -571,7 +584,7 @@
 
     #honeyText p {
         margin: auto;
-        width: 60%;
+        width: 64%;
         color: yellow;
         font-size: 1.5em;
         font-family: 华文行楷,monospace;
@@ -581,10 +594,17 @@
         padding: 15px;
     }
 
+    #namePre {
+        font-family: 华文行楷, monospace;
+    }
+
     #nameText {
-        font-family: KswHannyaotamesi,monospace;
-        color: yellow;
+        font-family: KswHannyaotamesi, 蝉羽刀剑柔情, 华文行楷, monospace;
         float: right;
+    }
+
+    #nameOuter {
+        color: yellow;
     }
 
     .myBorder {
@@ -637,7 +657,10 @@
                 <div id="honeyText">
                     <p id="justText"></p>
                     <p id="timeText"></p>
-                    <p><span id="nameText"></span></p>
+                    <p id="nameOuter">
+                        <span id="namePre"></span>
+                        <span id="nameText"></span>
+                    </p>
                 </div>
             </div>
             <div class="dialog">
