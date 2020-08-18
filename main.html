@@ -43,6 +43,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
+            opacity: 0;
         }
 
         #moon {
@@ -104,6 +105,20 @@
             will-change: filter , color;
             filter: saturate(60%);
             animation: eachText 3s ease-out both, flicker steps(100) 1s infinite;
+        }
+
+        @keyframes showStar {
+            from {
+                opacity: 0;
+            }
+
+            70% {
+                opacity: 0.2;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes sky {
@@ -261,7 +276,7 @@
         }
 
         #enter {
-            --fill-color : yellow;
+            --fill-color : #fff;
             display: block;
             font: 700 6em "Baloo Bhaijaan", cursive;
             text-transform: uppercase;
@@ -287,8 +302,9 @@
             width: 420px;
             height: 150px;
             box-sizing: border-box;
-            border: 1px solid;
+            border: 2px solid;
             position: absolute;
+            border-radius: 5px;
             top: 40%;
             left: 36%;
             animation: boxBorder 6s infinite linear;
@@ -300,27 +316,27 @@
 
         @keyframes boxBorder {
             0% {
-                border-color: blueviolet;
+                border-color: #e2272d;
                 clip: rect(0, 420px, 2px, 0);
             }
 
             25% {
-                border-color: lime;
+                border-color: #49ff42;
                 clip: rect(0px, 2px, 150px, 0)
             }
 
             50% {
-                border-color: pink;
+                border-color: #fff9fb;
                 clip: rect(148px, 420px, 150px, 0)
             }
 
             75% {
-                border-color: green;
+                border-color: #801580;
                 clip: rect(0, 420px, 150px, 418px)
             }
 
             100% {
-                border-color: darkgoldenrod;
+                border-color: #91610a;
                 clip: rect(0, 420px, 2px, 0)
             }
         }
@@ -349,19 +365,18 @@
 
     <script>
         $(function() {
-            let count = window.innerWidth;
-
             eachLoadingText();
 
-            // let star = document.getElementsByClassName("star")[0];
-            // for(let i = 0;i < count; i++) {
-            //     star.appendChild(starCreator())
-            // }
+            let count = window.innerWidth;
+            let star = document.getElementsByClassName("star")[0];
+            for(let i = 0;i < count; i++) {
+                star.appendChild(starCreator())
+            }
 
-            // let content = document.getElementById("main_content");
-            // for (let i = 0;i < 25; i++) {
-            //     content.append(meteorCreator(i));
-            // }
+            let content = document.getElementById("main_content");
+            for (let i = 0;i < 25; i++) {
+                content.append(meteorCreator(i));
+            }
             eachText();
 
             $("#enter").click(() => {
@@ -371,13 +386,15 @@
                     setTimeout(() => {
                         $("#main_content").css("display", "block");
                         $("body").css("animation", "sky 4s ease-in-out").css("background-color", "#000");
-                        // controlMusic();
+                        $(".star").css("animation", "showStar 4s ease-in-out").css("opacity", "1");
+                        controlMusic();
                         $("#loading").css("display", "none");
                         setTimeout(print, 18300);
                     }, 6700);
                 }, 100);
             });
         });
+
 
         let index = 0;
         function print() {
@@ -393,19 +410,6 @@
                 // setTimeout(printLoveText, 100);
             }
         }
-
-        // function printLoveText() {
-        //     let text = "这是我们在一起的时光"
-        //     let  len = text.length;
-        //     if (index < len) {
-        //         $("#loveText").html(text.substring(0, index++) + "_");
-        //         setTimeout(printLoveText, 300);
-        //     } else {
-        //         index = 0;
-        //         $("#loveText").html(text);
-        //         setTimeout(printTimeText, 1000);
-        //     }
-        // }
 
         function printTimeText() {
 
@@ -505,8 +509,8 @@
             star.style.top = Math.ceil(Math.random() * window.innerHeight) + "px";
             star.style.left = Math.ceil(Math.random() * window.innerWidth) + "px";
             star.style.borderRadius = width + "px";
-            star.style.backgroundColor = "#909090";
-            star.style.boxShadow = "#545454 0 0 1px 1px";
+            star.style.backgroundColor = "#909090";//909090
+            star.style.boxShadow = "#545454 0 0 1px 1px";//545454
             if (width < 1) {
                 star.style.boxShadow = "#545454 0 0 " + (width / 2) + "px " + (width / 2) + "px";
                 star.style.animation = "star 2s infinite 0.5s";
@@ -589,7 +593,7 @@
         position: absolute;
         top: 18%;
         width: 56%;
-        height: 40%;
+        height: 300px;
         margin: 0;
         left: 22%;
         box-sizing: border-box;
@@ -629,12 +633,11 @@
         <div id="sky">
             <div id="moon"></div>
             <div class="myBorder">
-<!--                <p class="myText">七夕快乐</p>-->
-                <p class="myText">欢度国庆</p>
+                <p class="myText">七夕快乐</p>
                 <div id="honeyText">
                     <p id="justText"></p>
                     <p id="timeText"></p>
-                    <p id="nameText"></p>
+                    <p><span id="nameText"></span></p>
                 </div>
             </div>
             <div class="dialog">
@@ -643,7 +646,7 @@
                     <div class="triangle"></div>
                 </section>
             </div>
-<!--            <img src="images/moon.png" width="480" height="480" alt="">-->
+            <img src="images/moon.png" width="480" height="480" alt="">
 <!--            <img src="images/nlzn.png" width="120" height="120" alt="nlzn" class="musicController">-->
         </div>
         <audio hidden loop id="bgm"
