@@ -449,14 +449,15 @@
             }
         }
 
+        let html = "";
         function printTimeText() {
 
             let text = ["天", "时", "分", "秒"];
             let ids = ["day", "hour", "minute", "second"];
             let len = text.length;
             let element = $("#timeText");
-            let html = $(element).html();
-            html = html.replace("_", "");
+            // let html = $(element).html();
+            // html = html.replace("_", "");
             let i = Math.floor(index / 2);
 
             if (index < 8) {
@@ -464,12 +465,12 @@
                     let times = getTime();
                     html += "<span id='" + ids[i] + "' style='font-size: 2em;'>"
                         + times[i] +
-                        " </span>" + "_";
-                    $(element).html(html);
+                        "</span>";
+                    $(element).html(html + "_");
                     setTimeout(printTimeText, 300);
                 } else {
-                    html += text[i] + "_";
-                    $(element).html(html);
+                    html += text[i];
+                    $(element).html(html + "_");
                     setTimeout(printTimeText, 300);
                 }
                 index++;
